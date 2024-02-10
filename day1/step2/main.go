@@ -49,10 +49,17 @@ func stringToInt(input string) int {
 
 func processLine(line string) int {
 	r, _ := regexp.Compile(`one|two|three|four|five|six|seven|eight|nine|\d`)
-	matches := r.FindAllString(line, -1)
+	var firstNumber, lastNumber int
 
-	firstNumber := stringToInt(matches[0])
-	lastNumber := stringToInt(matches[len(matches)-1])
+	firstNumber = stringToInt(r.FindString(line))
+	var match string
+	for i := len(line) - 1; i >=0; i-- {
+		if match = r.FindString(line[i:len(line)]); len(match) == 0 {
+			continue
+		}
+		lastNumber = stringToInt(match)
+		break
+	}
 
 	return firstNumber*10 + lastNumber
 }
